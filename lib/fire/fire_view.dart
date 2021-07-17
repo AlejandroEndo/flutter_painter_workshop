@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'fire_painter.dart';
 
 class FireView extends StatefulWidget {

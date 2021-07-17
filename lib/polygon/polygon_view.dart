@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_painter_workshop/polygon/polygon_painter.dart';
+
+import 'polygon_painter.dart';
 
 class PolygonView extends StatefulWidget {
   const PolygonView({Key? key}) : super(key: key);

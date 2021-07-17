@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_painter_workshop/polygon/polygon_view.dart';
-
+import 'package:flutter_painter_workshop/prediction_ball/magic_ball.dart';
+import 'package:flutter_painter_workshop/prediction_ball/prediction_sphere.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: PolygonView(),
+        child: MagicBall(),
       ),
     );
   }
