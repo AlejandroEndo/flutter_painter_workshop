@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_painter_workshop/prediction_ball/magic_ball.dart';
-import 'package:flutter_painter_workshop/prediction_ball/prediction_sphere.dart';
+
+import 'prediction_ball/magic_ball.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
