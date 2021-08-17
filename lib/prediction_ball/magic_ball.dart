@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import 'ball_shadow.dart';
 import 'prediction_sphere.dart';
 import 'prediction_window.dart';
@@ -54,44 +55,52 @@ class _MagicBallState extends State<MagicBall>
     Size size = Size.square(MediaQuery.of(context).size.shortestSide);
     final Offset windowPosition =
         Offset.lerp(restPosition, tapPosition, anim.value)!;
-    return Stack(
-      children: [
-        BallShadow(
-          diameter: size.shortestSide,
-        ),
-        GestureDetector(
-          onPanStart: (dragDetails) => _start(dragDetails.localPosition, size),
-          onPanUpdate: (dragDetails) =>
-              _update(dragDetails.localPosition, size),
-          onPanEnd: (dragDetails) => _end(),
-          child: PredictionSphere(
-            diameter: size.shortestSide,
-            lightOffset: lightOffset,
-            child: Transform(
-              origin: size.center(Offset.zero),
-              transform: Matrix4.identity()
-                ..translate(windowPosition.dx * size.width / 2,
-                    windowPosition.dy * size.height / 2)
-                ..rotateZ(windowPosition.direction)
-                ..rotateY(windowPosition.distance * pi / 2)
-                ..rotateZ(-windowPosition.direction)
-                ..scale(0.5 - 0.15 * windowPosition.distance),
-              child: PredictionWindow(
-                lightOffset: lightOffset - windowPosition,
-                child: Opacity(
-                  opacity: 1 - animController.value,
-                  child: Transform.rotate(
-                    angle: wooble,
-                    child: Prediction(
-                      text: prediction,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Magic 8 Ball'),
+      ),
+      body: Center(
+        child: Stack(
+          children: [
+            BallShadow(
+              diameter: size.shortestSide,
+            ),
+            GestureDetector(
+              onPanStart: (dragDetails) =>
+                  _start(dragDetails.localPosition, size),
+              onPanUpdate: (dragDetails) =>
+                  _update(dragDetails.localPosition, size),
+              onPanEnd: (dragDetails) => _end(),
+              child: PredictionSphere(
+                diameter: size.shortestSide,
+                lightOffset: lightOffset,
+                child: Transform(
+                  origin: size.center(Offset.zero),
+                  transform: Matrix4.identity()
+                    ..translate(windowPosition.dx * size.width / 2,
+                        windowPosition.dy * size.height / 2)
+                    ..rotateZ(windowPosition.direction)
+                    ..rotateY(windowPosition.distance * pi / 2)
+                    ..rotateZ(-windowPosition.direction)
+                    ..scale(0.5 - 0.15 * windowPosition.distance),
+                  child: PredictionWindow(
+                    lightOffset: lightOffset - windowPosition,
+                    child: Opacity(
+                      opacity: 1,//1 - animController.value,
+                      child: Transform.rotate(
+                        angle: wooble,
+                        child: Prediction(
+                          text: prediction,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
@@ -105,6 +114,7 @@ class _MagicBallState extends State<MagicBall>
       (2 * position.dx / size.width) - 1,
       (2 * position.dy / size.height) - 1,
     );
+    
     final double maxDistance = 0.9;
     if (tapPosition.distance > maxDistance)
       tapPosition = Offset.fromDirection(tapPosition.direction, maxDistance);

@@ -42,6 +42,7 @@ class ClockPainer extends CustomPainter {
       ..strokeWidth = 12.0
       ..strokeCap = StrokeCap.round;
 
+
     // CLOCK CASE BACKGROUND
     canvas.drawCircle(center, radius - size.width * 0.01, paint);
     canvas.drawCircle(center, radius - size.width * 0.01, outlinePaint);

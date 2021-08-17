@@ -13,21 +13,35 @@ class ClockView extends StatefulWidget {
 }
 
 class _ClockViewState extends State<ClockView> {
+  late Timer timer;
   @override
   void initState() {
-    Timer.periodic(Duration(seconds: 1), (timer) => setState(() {}));
+    timer = Timer.periodic(Duration(seconds: 1), (timer) => setState(() {}));
     super.initState();
   }
 
   @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 300,
-      child: Transform.rotate(
-        angle: -pi / 2,
-        child: CustomPaint(
-          painter: ClockPainer(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Animated Clock'),
+      ),
+      body: Center(
+        child: Container(
+          width: 300,
+          height: 300,
+          child: Transform.rotate(
+            angle: -pi / 2,
+            child: CustomPaint(
+              painter: ClockPainer(),
+            ),
+          ),
         ),
       ),
     );
